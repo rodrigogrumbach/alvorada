@@ -1,0 +1,9 @@
+# Estrutura do banco da solução: primeiro a da Athena (vem dentro do athena-core), depois a do cliente.
+# Tabelas só do cliente: prefixo cli_ (ou o do cliente), um arquivo novo por mudança, changeSet aplicado nunca muda —
+# as mesmas regras da Athena (ver o CLAUDE.md da Athena). Quase sempre não é preciso: tipos de caso, campos e listas
+# são configuração, montada pelo ModeloDaSolucao.
+databaseChangeLog:
+  - include:
+      file: db/changelog/db.changelog-master.yaml
+  # - include:
+  #     file: db/cliente/001-exemplo.yaml

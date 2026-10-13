@@ -1,0 +1,18 @@
+# Compilação
+target/
+
+# Configuração local com senhas (fica fora do Git)
+config/
+
+# Documentos originais do cliente: nunca entram no Git (alexandria/PROCESSO.md).
+# Pastas por data (ex.: 2026-10-13/) e pasta de documentos.
+/[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/
+/Docs/
+/docs/
+
+# IDE e sistema
+.idea/
+*.iml
+.vscode/
+Thumbs.db
+.DS_Store

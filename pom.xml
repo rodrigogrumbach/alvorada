@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!--
+	  Ponto de partida de um projeto de cliente (ver LEIA-ME.md). Dentro do repositório da Athena ele herda do
+	  athena-parent, para ser compilado e testado junto. No repositório do cliente, trocar o <parent> por:
+	    <parent>
+	      <groupId>org.springframework.boot</groupId>
+	      <artifactId>spring-boot-starter-parent</artifactId>
+	      <version>4.1.1</version>   (a mesma da Athena)
+	      <relativePath/>
+	    </parent>
+	  e pôr a versão da Athena na dependência athena-core (ex.: <version>0.1.0-SNAPSHOT</version>).
+	-->
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>br.com.brainstorming</groupId>
+		<artifactId>athena-parent</artifactId>
+		<version>0.1.0-SNAPSHOT</version>
+	</parent>
+	<groupId>br.com.brainstorming.clientes</groupId>
+	<artifactId>modelo-cliente</artifactId>
+	<name>Projeto de cliente (modelo)</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>br.com.brainstorming</groupId>
+			<artifactId>athena-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<!-- o jar da solução: target\solucao.jar (o pacote de instalação procura por ele) -->
+		<finalName>solucao</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- versão e data do build em META-INF/build-info.properties (Configuração → Sistema e saúde) -->
+				<executions>
+					<execution>
+						<goals><goal>build-info</goal></goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- commit da solução em git.properties: com a versão, identifica exatamente o que está instalado no cliente -->
+			<plugin>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<configuration>
+					<failOnNoGitDirectory>false</failOnNoGitDirectory>
+					<!-- só o necessário: sem e-mails e nomes de quem fez o commit ou o build -->
+					<includeOnlyProperties>
+						<includeOnlyProperty>^git.commit.id.(abbrev|full)$</includeOnlyProperty>
+						<includeOnlyProperty>^git.commit.time$</includeOnlyProperty>
+						<includeOnlyProperty>^git.dirty$</includeOnlyProperty>
+					</includeOnlyProperties>
+				</configuration>
+			</plugin>
+			<!-- Alexandria: valida as fichas (alexandria/conhecimento) e grava no jar só as aprovadas + o manifesto.
+			     Fase process-classes: roda antes dos testes e também com -DskipTests; ficha com erro reprova o build. -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>alexandria</id>
+						<phase>process-classes</phase>
+						<goals><goal>java</goal></goals>
+						<configuration>
+							<mainClass>br.com.brainstorming.athena.alexandria.EmpacotadorAlexandria</mainClass>
+							<arguments>
+								<argument>${project.basedir}/alexandria</argument>
+								<argument>${project.build.outputDirectory}/alexandria</argument>
+								<argument>${project.version}</argument>
+								<argument>${project.name}</argument>
+							</arguments>
+							<cleanupDaemonThreads>false</cleanupDaemonThreads>
+						</configuration>
+					</execution>
+					<!-- Formulário de Esclarecimentos + Anexo de Entendimentos Preliminares (só quando pedido):
+					     .\mvnw.cmd exec:java@formulario  — gera alexandria/formularios/F-xx-... e marca as fichas.
+					     O PDFBox entra só aqui (dependência do plugin), nunca no jar da solução. -->
+					<execution>
+						<id>formulario</id>
+						<goals><goal>java</goal></goals>
+						<configuration>
+							<mainClass>br.com.brainstorming.athena.alexandria.GeradorFormulario</mainClass>
+							<includePluginDependencies>true</includePluginDependencies>
+							<arguments>
+								<argument>${project.basedir}/alexandria</argument>
+								<argument>${project.name}</argument>
+							</arguments>
+							<cleanupDaemonThreads>false</cleanupDaemonThreads>
+						</configuration>
+					</execution>
+					<!-- Respostas do cliente ao formulário: .\mvnw.cmd exec:java@respostas "-Drespostas=C:\caminho\F-02-respondido.pdf"
+					     — aplica as avaliações às fichas e grava a evidência em formularios/F-xx-respostas.md
+					     (o PDF respondido não fica no repositório). -->
+					<execution>
+						<id>respostas</id>
+						<goals><goal>java</goal></goals>
+						<configuration>
+							<mainClass>br.com.brainstorming.athena.alexandria.LeitorRespostas</mainClass>
+							<includePluginDependencies>true</includePluginDependencies>
+							<arguments>
+								<argument>${project.basedir}/alexandria</argument>
+								<argument>${respostas}</argument>
+							</arguments>
+							<cleanupDaemonThreads>false</cleanupDaemonThreads>
+						</configuration>
+					</execution>
+					<!-- Registrar um documento recebido (ver alexandria/PROCESSO.md): calcula o SHA-256, dá o código D-xx e escreve
+					     o bloco em fontes/INDICE.md. O original não é copiado (fica no acervo protegido indicado em -Dlocal). -->
+					<execution>
+						<id>fonte</id>
+						<goals><goal>java</goal></goals>
+						<configuration>
+							<mainClass>br.com.brainstorming.athena.alexandria.RegistrarFonte</mainClass>
+							<arguments>
+								<argument>${project.basedir}/alexandria</argument>
+								<argument>${fonte}</argument>
+								<argument>${titulo}</argument>
+								<argument>${versao}</argument>
+								<argument>${recebido}</argument>
+								<argument>${remetente}</argument>
+								<argument>${local}</argument>
+								<argument>${anonimizado}</argument>
+								<argument>${sigiloso}</argument>
+								<argument>${autorizacao}</argument>
+								<argument>${observacao}</argument>
+							</arguments>
+							<cleanupDaemonThreads>false</cleanupDaemonThreads>
+						</configuration>
+					</execution>
+					<!-- Aprovar depois da revisão: .\mvnw.cmd exec:java@aprovar "-Dfichas=ENT-001,REG-008" "-Drevisor=Nome" -->
+					<execution>
+						<id>aprovar</id>
+						<goals><goal>java</goal></goals>
+						<configuration>
+							<mainClass>br.com.brainstorming.athena.alexandria.AprovarFichas</mainClass>
+							<arguments>
+								<argument>${project.basedir}/alexandria</argument>
+								<argument>${fichas}</argument>
+								<argument>${revisor}</argument>
+							</arguments>
+							<cleanupDaemonThreads>false</cleanupDaemonThreads>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.pdfbox</groupId>
+						<artifactId>pdfbox</artifactId>
+						<version>3.0.5</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+</project>
