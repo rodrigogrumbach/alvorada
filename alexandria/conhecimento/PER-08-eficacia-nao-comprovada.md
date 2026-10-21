@@ -7,7 +7,7 @@ origem:
   - D-02, item 9
   - D-03, aba Controle de NCs 2026, colunas B, I e J
 observacao: o procedimento não diz o que acontece quando o plano não resolve; na planilha há NCs encerradas poucos dias após a abertura
-formulario: F-02 · P-08
+formulario: F-03 · P-08
 ---
 Se, na verificação da eficácia, a Qualidade concluir que o plano de ação não resolveu o problema, o que acontece: a NC
 volta para "aguardando fornecedor" pedindo um novo plano, ou é aberta uma NC nova?

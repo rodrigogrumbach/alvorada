@@ -6,7 +6,7 @@ status: sugerido
 origem:
   - D-02, item 2
   - D-03, aba Controle de NCs 2026, colunas B a H
-formulario: F-02 · E-05
+formulario: F-03 · E-05
 ---
 O inspetor da Qualidade abre a NC no mesmo dia em que encontra o problema. Ao abrir, informa a data de abertura, o
 fornecedor, o pedido de compra, o tipo, a gravidade, a descrição do problema e o inspetor responsável. Todos esses

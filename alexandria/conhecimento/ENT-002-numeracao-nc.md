@@ -5,7 +5,7 @@ titulo: Numeração da NC
 status: sugerido
 origem:
   - D-03, aba Controle de NCs 2026, coluna A
-formulario: F-02 · E-02
+formulario: F-03 · E-02
 ---
 Cada NC recebe um número sequencial no ano, no formato NC-001/2026, e a numeração recomeça em 001 a cada ano.
 

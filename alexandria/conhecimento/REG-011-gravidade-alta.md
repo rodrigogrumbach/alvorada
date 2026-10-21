@@ -5,7 +5,7 @@ titulo: NC de gravidade alta
 status: sugerido
 origem:
   - D-02, item 4
-formulario: F-02 · E-08
+formulario: F-03 · E-08
 ---
 A NC de gravidade alta bloqueia o lote no almoxarifado e precisa ser comunicada rapidamente ao fornecedor.
 

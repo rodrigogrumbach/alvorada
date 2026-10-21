@@ -6,7 +6,7 @@ status: sugerido
 origem:
   - D-02, item 8
   - D-03, aba Controle de NCs 2026, coluna L
-formulario: F-02 · E-12
+formulario: F-03 · E-12
 ---
 O fornecedor com três NCs no trimestre entra em observação. Enquanto estiver em observação, todos os lotes dele passam
 por inspeção reforçada.

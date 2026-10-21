@@ -4,6 +4,10 @@ target/
 # Configuração local com senhas (fica fora do Git)
 config/
 
+# Banco H2 de desenvolvimento (spring.datasource.url=jdbc:h2:file:./dados/...) e logs
+/dados/
+/logs/
+
 # Documentos originais do cliente: nunca entram no Git (alexandria/PROCESSO.md).
 # Pastas por data (ex.: 2026-10-13/) e pasta de documentos.
 /[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]/

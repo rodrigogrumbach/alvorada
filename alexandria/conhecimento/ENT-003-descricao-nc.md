@@ -6,7 +6,7 @@ status: sugerido
 origem:
   - D-02, item 2
   - D-03, aba Controle de NCs 2026, coluna G
-formulario: F-02 · E-03
+formulario: F-03 · E-03
 ---
 A descrição da NC deve contar o que foi encontrado, quanto foi afetado (quantidade, medida ou dias de atraso) e se o
 problema afetou a produção (por exemplo, parada de linha). Inferido dos exemplos da planilha: o procedimento só pede

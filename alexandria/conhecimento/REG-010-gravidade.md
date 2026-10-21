@@ -6,7 +6,7 @@ status: sugerido
 origem:
   - D-02, item 4
   - D-03, aba Listas, coluna B
-formulario: F-02 · E-07
+formulario: F-03 · E-07
 ---
 Toda NC tem uma gravidade: baixa, média ou alta.
 

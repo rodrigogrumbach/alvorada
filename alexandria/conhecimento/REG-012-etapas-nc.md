@@ -6,7 +6,7 @@ status: sugerido
 origem:
   - D-02, item 5
   - D-03, aba Listas, coluna C
-formulario: F-02 · E-09
+formulario: F-03 · E-09
 ---
 A NC passa pelas etapas aberta, em análise, aguardando fornecedor, verificação da eficácia e encerrada, nessa ordem.
 

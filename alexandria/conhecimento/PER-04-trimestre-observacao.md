@@ -7,7 +7,7 @@ origem:
   - D-02, item 8
   - D-03, aba Controle de NCs 2026, coluna L, linhas 6, 11 e 12
 observacao: a planilha marca "em observação" uma NC de abril cujo fornecedor só tinha 3 NCs no 1º trimestre; o procedimento não diz como contar o trimestre nem como sair da observação
-formulario: F-02 · P-04
+formulario: F-03 · P-04
 ---
 O procedimento diz que o fornecedor com três NCs no trimestre entra em observação. O trimestre é o do calendário
 (janeiro a março, abril a junho...) ou os últimos 90 dias a partir de cada NC? Na planilha, um fornecedor aparece em

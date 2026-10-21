@@ -5,7 +5,7 @@ titulo: Não conformidade de fornecedor (NC)
 status: sugerido
 origem:
   - D-02, item 1
-formulario: F-02 · E-04
+formulario: F-03 · E-04
 ---
 Não conformidade (NC) é um problema encontrado no recebimento de um material comprado. Ela é registrada e tratada até
 o fornecedor dar a solução definitiva.

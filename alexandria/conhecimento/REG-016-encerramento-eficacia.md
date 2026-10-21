@@ -6,7 +6,7 @@ status: sugerido
 origem:
   - D-02, item 9
   - D-03, aba Controle de NCs 2026, coluna J
-formulario: F-02 · E-13
+formulario: F-03 · E-13
 ---
 A NC só é encerrada depois que a Qualidade verifica a eficácia do plano de ação. A verificação é feita em até 30 dias
 depois da implantação do plano. A data de encerramento é registrada quando a NC passa para a etapa encerrada.
